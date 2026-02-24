@@ -1,3 +1,5 @@
+const { get } = require("mongoose");
+
 const prompt = require("prompt-sync")();
 // Node.js require import modules
 
@@ -28,12 +30,28 @@ const getNumberOfLines = () => {
     }
   }
 }
+
 // 3. Collect a bet amount
+
+const getBetAmount = (balance, lines) => {
+  while(true){
+    const getBet = prompt("Enter the bet amount per line: ");
+    const numberBet = parseFloat(getBet);
+
+    if(isNaN(numberBet) || numberBet <= 0 || numberBet > (balance/lines)){
+      console.log("Invalid bet amount please enter computed amount, can bet");
+    } else {
+      return numberBet;
+    }
+  }
+}
 // 4. Spin the slot machine
 // 5. Check if the user won
 // 6. Give the winnings
 // 7. Play again
 
 // Call the functions
-console.log(deposit());
-console.log(getNumberOfLines());
+// console.log(deposit());
+let balance = deposit();
+const numberOfLines = getNumberOfLines();
+const bet = getBetAmount(balance, numberOfLines);
