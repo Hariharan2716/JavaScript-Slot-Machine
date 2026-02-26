@@ -147,15 +147,35 @@ const getWinnings = (rows, betAmount, lines) => {
   return winnings;
 }
 
+// 7. Play again
+const game = () => {
+  let balance = deposit();                                   // we set the balance to the amount of deposit.
+
+  // Inorder to repeat the process of playing the game repetedly as per the player request
+  while(true){
+    console.log(`You have a balance of $${balance}`)
+    const numberOfLines = getNumberOfLines();
+    const bet = getBetAmount(balance, numberOfLines);         // This gets the amount of bet per line
+    // After the bet we need to reduce the bet amount from the balance
+    balance -= bet * numberOfLines;                           // number of lines determines the total amount to be deduced.
+    const reels = spin();                                     // This function now helps to generate the random spin
+    const rows = transpose(reels);                            // This makes the coloums generated to rows
+    printRows(rows);                                          // This converts the rows to string
+    const winnings = getWinnings(rows, bet, numberOfLines);
+    balance += winnings;
+    console.log(`You won, $${winnings.toString()}`)
+
+    if(balance <= 0){
+      console.log("You can't play refill.");
+      break; 
+    }
+
+    const playAgain = prompt("Do you want to play again (y/n)?");
+
+    if(playAgain != "y") break;
+
+  }
+}
 
 // // Call the functions
-// let balance = deposit();
-// const numberOfLines = getNumberOfLines();
-// const bet = getBetAmount(balance, numberOfLines);
-// const reels = spin();
-// const rows = transpose(reels);
-// // console.log(reels);
-// // console.log(rows);
-// printRows(rows);
-// const winnings = getWinnings(rows, bet, numberOfLines);
-// console.log(`You won, $${winnings.toString()}`);
+game();
