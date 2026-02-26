@@ -119,14 +119,43 @@ const printRows = (rows) => {
 
 // 5. Check if the user won
 // 6. Give the winnings
-// 7. Play again
+const getWinnings = (rows, betAmount, lines) => {
+  let winnings = 0;
 
-// Call the functions
-let balance = deposit();
-const numberOfLines = getNumberOfLines();
-const bet = getBetAmount(balance, numberOfLines);
-const reels = spin();
-const rows = transpose(reels);
-console.log(reels);
-console.log(rows);
-printRows(rows);
+  for(let row = 0; row < lines; row++){
+    const symbols = rows[row];
+    /**I was thinking for the hard way to check for the repeting condtion or winning condition a simple effective way
+     * Is to check for mismatch even for simple one condition, if the condition becomes false then you can simply break
+     * rather then checking for the entire row.
+     */
+    let allSame = true;
+    // for each loop
+    for(const symbol of symbols){
+      if(symbol != symbols[0]){
+        allSame = false;
+        break;
+      }
+    }
+
+    if(allSame){
+      winnings += bet * VALUES_SYMBOL[symbols[0]];
+      /**Why VALUES_SYMBOL since we know that the row is of same symbols now we need to give the winnings 
+       * how do we do that? - we multiply the bet amount and the value of the symbol that apperared on the line that he bet.
+       */
+    }
+  }
+  return winnings;
+}
+
+
+// // Call the functions
+// let balance = deposit();
+// const numberOfLines = getNumberOfLines();
+// const bet = getBetAmount(balance, numberOfLines);
+// const reels = spin();
+// const rows = transpose(reels);
+// // console.log(reels);
+// // console.log(rows);
+// printRows(rows);
+// const winnings = getWinnings(rows, bet, numberOfLines);
+// console.log(`You won, $${winnings.toString()}`);

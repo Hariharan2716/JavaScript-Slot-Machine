@@ -93,3 +93,9 @@ A | B | D
 C | C | D
 
 ```
+
+### 💷 Get the Winnings
+- What I want to achive is that I want to get the gamer winning amount, how?
+- To keep this minimal I did't give the option/freedom for the player to pick the line that want to bet on.
+- Requried data fields number of rows, the amount of bet, the lines the bet are placed.
+- Created a function with a variable called winnings
