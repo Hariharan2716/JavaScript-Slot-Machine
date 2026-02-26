@@ -59,3 +59,37 @@ storing the balace as `let` so that the amount keep can on changing as per bet l
 -- Here we used colos as outer loop and rows as inner loop because the loop runs for the row determines how many symbols each reel will have.
 -- Inner loop runs for the number of rows whihc determines how many symbols each reel will have. In each loop/iteration a random index is generated based on the current reelSymbols array's length.
 The selectedSymbol is retrieved from reelSymbols using randomIndex then push the selectedSymbol to reels array, finally selected symbol is removed from the array of reelSymbols using splice(), return value.  After all reels have been populated with random symbols, the spin function returns the reels array.
+
+### 🌀 Transpose
+- Now that this spin() function give the randomly generated reels the values are in a transpose -> meaning - The row values are needed to be in coloumns value vis-versa so in order to fix it we transpose the array.
+
+- Eg.,
+
+```
+[A B D] -> This is coloum not the row which need to be transposed.
+[D D D]
+[B C A]
+
+Transposed Array
+[A D B]
+[B D C]
+[D D A]
+
+```
+- The transpose function is a helper function that re-organizes the data from a column-based format to a row-based format.
+
+#### How ⁉
+-- Take the reels array in that pick columns as input
+-- Then create a new empty array called rows
+-- It loops through each potential row [- - -] and then through each column [=] within that row.
+-- For each element, it takes the symbol from the current column and the current row and adds it to the new rows array.
+
+To have a Visual appealing result we use string concatination in the 2D array using for each loop and .entries() method with a nested for loop so there we access to each row and print it with a pipe '|' in between the concatiantion of the value in the row.
+
+Eg.,
+```
+D | A | C
+A | B | D
+C | C | D
+
+```
